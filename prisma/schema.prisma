@@ -29,7 +29,7 @@ model Product {
   isFeatured Boolean  @default(false)
   options   Json[]
   category  Category  @relation(fields: [catSlug], references: [slug])
-  catSlag   String
+  catSlug   String
 }
 
 model Order {
