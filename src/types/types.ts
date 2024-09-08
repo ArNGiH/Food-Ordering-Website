@@ -21,7 +21,7 @@ export type OrderType={
     id:string;
     userEmail:string;
     price:number;
-    products:object[]
+    products:CartItemType[];
     status:string;
     createdAt:Date;
     intent_id:string;
