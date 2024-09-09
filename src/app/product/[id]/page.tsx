@@ -17,7 +17,7 @@ const getData = async (id: string) => {
 };
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
-  const singleProduct = await getData(params.id);
+  const singleProduct:ProductType = await getData(params.id);
 
   if (!singleProduct) {
     return <div>Product not found or failed to load.</div>;
