@@ -1,27 +1,28 @@
-
 import { ProductType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-type Props={
-  params: {
-    category: string;
-  };
-}
 
-const getData=async(category:string)=>{
-  const res=await fetch(`http://localhost:3000/api/products?cat=${category}`,{
+const getData = async (category:string)=>{
+  const res = await fetch(`http://localhost:3000/api/products?cat=${category}`,{
     cache:"no-store"
   })
 
   if(!res.ok){
-    throw new Error(`Failed to fetch data: ${res.status}`)
+    throw new Error("Failed!");
+    
   }
+
   return res.json()
 }
 
-const CategoryPage = async({params}:Props) => {
-  const products:ProductType[]=await getData(params.category)
+type Props = {
+  params:{category:string}
+}
+
+const CategoryPage = async ({params}:Props) => {
+
+  const products:ProductType[] = await getData(params.category)
   return (
     <div className="flex flex-wrap text-red-500">
       {products.map((item) => (
@@ -35,7 +36,7 @@ const CategoryPage = async({params}:Props) => {
           {/* TEXT CONTAINER */}
           <div className="flex items-center justify-between font-bold">
             <h1 className="text-2xl uppercase p-2">{item.title}</h1>
-            <h2 className="group-hover:hidden text-xl">INR {item.price}</h2>
+            <h2 className="group-hover:hidden text-xl">${item.price}</h2>
             <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">Add to Cart</button>
           </div>
         </Link>
