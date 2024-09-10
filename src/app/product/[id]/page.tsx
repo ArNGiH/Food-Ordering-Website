@@ -4,20 +4,31 @@ import { ProductType } from "@/types/types";
 import Image from "next/image";
 import React from "react";
 
-const getData = async (id: string) => {
-  const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-    cache: "no-store",
-  });
+const getData = async (id: string): Promise<ProductType> => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+      cache: "no-store",
+    });
 
-  if (!res.ok) {
-    throw new Error("Failed!");
+    if (!res.ok) {
+      throw new Error("Failed to fetch product data.");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    throw error; // Re-throw the error to be handled by the calling function
   }
-
-  return res.json();
 };
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
-  const singleProduct:ProductType = await getData(params.id);
+  let singleProduct: ProductType | null = null;
+
+  try {
+    singleProduct = await getData(params.id);
+  } catch {
+    return <div>Product not found or failed to load.</div>;
+  }
 
   if (!singleProduct) {
     return <div>Product not found or failed to load.</div>;

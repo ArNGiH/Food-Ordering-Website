@@ -17,7 +17,10 @@ export const GET = async (
     });
 
     if (!product) {
-      return new NextResponse(JSON.stringify({ message: "Product not found!" }), { status: 404 });
+      return new NextResponse(
+        JSON.stringify({ message: "Product not found!" }),
+        { status: 404 }
+      );
     }
 
     return new NextResponse(JSON.stringify(product), { status: 200 });
@@ -70,7 +73,8 @@ export const DELETE = async (
     }
   }
 
-  return new NextResponse(JSON.stringify({ message: "You are not allowed!" }), {
-    status: 403,
-  });
+  return new NextResponse(
+    JSON.stringify({ message: "You are not allowed!" }),
+    { status: 403 }
+  );
 };

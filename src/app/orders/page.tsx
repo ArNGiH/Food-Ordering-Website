@@ -73,8 +73,9 @@ const OrdersPage = () => {
               </td>
               <td className="py-6 px-1">{item.price}</td>
               <td className="hidden md:block py-6 px-1">
-                {item.products[0].title}
-              </td>
+  {item.products && item.products.length > 0 ? item.products[0].title : 'No Title'}
+</td>
+
               {session?.user.isAdmin ? (
                 <td>
                   <form
