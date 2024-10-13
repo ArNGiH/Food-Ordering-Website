@@ -1,5 +1,6 @@
 import { prisma } from "@/utils/connect";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 
 
@@ -13,7 +14,19 @@ export const GET = async () => {
   }
 };
 
-export const POST = async () => {
-  // Implement your POST handler logic here
-  return new NextResponse("Hello", { status: 200 });
+
+export const POST = async (req: NextRequest) => {
+  try {
+    const body = await req.json(); // Parse the JSON request body
+    const newCategory = await prisma.category.create({
+      data: body,
+    });
+    return new NextResponse(JSON.stringify(newCategory), { status: 201 });
+  } catch (error) {
+    console.error(error); 
+    return new NextResponse(
+      JSON.stringify({ message: "Failed to create category" }),
+      { status: 500 }
+    ); 
+  }
 };

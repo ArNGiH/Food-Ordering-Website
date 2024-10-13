@@ -6,17 +6,17 @@ const data = [
   {
     id: 1,
     title: "always fresh & always crispy & always hot",
-    image: "/slide1.png",
+    image: "/slide6.png",
   },
   {
     id: 2,
-    title: "we deliver your order wherever you are in NY",
+    title: "we deliver your order anywhere in India",
     image: "/slide2.png",
   },
   {
     id: 3,
     title: "the best pizza to share with your family",
-    image: "/slide3.jpg",
+    image: "/slide4.png",
   },
 ];
 
@@ -39,7 +39,7 @@ const Slider = () => {
         <h1 className="text-5xl text-center uppercase p-4 md:p-10 md:text-6xl xl:text-7xl">
           {data[currentSlide].title}
         </h1>
-        <button className="bg-red-500 text-white py-4 px-8">Order Now</button>
+        <button className="bg-orange-500 text-white py-4 px-8">Order Now</button>
       </div>
      
       <div className="w-full flex-1 relative">
